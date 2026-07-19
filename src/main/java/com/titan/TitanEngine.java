@@ -1,3 +1,5 @@
+package com.titan;
+
 import java.io.*;
 import java.net.*; // AG KUTUPHANESI EKLENDI
 import java.util.*;
@@ -64,6 +66,15 @@ public class TitanEngine {
                     if (parts.length < 2) return "ERROR: Kullanim GET <key>";
                     if (memoryStore.containsKey(parts[1])) {
                         return "FOUND " + memoryStore.get(parts[1]);
+                    } else {
+                        return "NOT_FOUND";
+                    }
+
+                case "DEL":
+                    if (parts.length < 2) return "ERROR: Kullanim DEL <key>";
+                    if (memoryStore.remove(parts[1]) != null) {
+                        saveDatabase();
+                        return "OK";
                     } else {
                         return "NOT_FOUND";
                     }
